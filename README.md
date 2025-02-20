@@ -13,7 +13,7 @@ This repository implements the unsupervised anomaly detection framework presente
 ## Original Implementation
 The initial implementation uses a convolutional autoencoder (CAE) model, as shown in Fig. 1, trained on electrical and electromagnetic time series data for anomaly detection in wind turbine permanent-magnet generators. The model is trained on normal operational data and evaluated on various fault conditions. For detailed methodology and results, please refer to the paper (we appreciate citations if you find this work useful for your research).
 
-**Note**: The dataset used in the original work is private but can be made available upon request.
+**Note**: The dataset used in this study was simulated using proprietary software and can be made available by the corresponding author upon reasonable request.
 
 ## Extended Framework
 This repository extends the original work by implementing and evaluating additional autoencoder architectures and loss functions for time series anomaly detection.
