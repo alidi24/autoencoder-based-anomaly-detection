@@ -16,7 +16,7 @@ The initial implementation uses a convolutional autoencoder (CAE) model, as show
 <p align="center">
   <img src="cae-model.png" alt="CAE model architecture" width="80%">
   <br>
-  <em>Fig. 1: Data processing and CAE model architecture overview</em>
+  <em>Fig. 1: Overview of data processing and CAE model architecture implemented in the paper</em>
 </p>
 
 **Note**: The dataset used in this study was simulated using proprietary software and can be made available upon request.
