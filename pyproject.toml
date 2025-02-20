@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "autoencoder-based-anomaly-detection"
+version = "0.1.0"
+description = "Implementation of an unsupervised anomaly detection framework based on autoencoder architectures for time series data."
+authors = ["Ali Dibaj <ali.dibaj@outlook.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+numpy = "^1.23.5"
+scipy = "^1.15.1"
+matplotlib = "^3.10.0"
+pandas = "^2.2.3"
+torch = {version = "^2.2.1", extras = ["cpu"]}
+lightning = "^2.1.0"
+plotly = "^6.0.0"
+datasets = "^3.3.0"
+scikit-learn = "^1.6.1"
+librosa = "^0.10.2.post1"
+seaborn = "^0.13.2"
+torchinfo = "^1.8.0"
+nbformat = "^5.10.4"
+
+
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
