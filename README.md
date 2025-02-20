@@ -61,7 +61,7 @@ poetry install
 
 # Activate the virtual environment
 poetry env activate
-''' 
+
 
 ## License 
 [License type to be added]
