@@ -31,3 +31,40 @@ This repository extends the original work by implementing and evaluating additio
 
 ### Loss Functions
 [To be added]
+
+
+## Requirements & Installation
+This project uses Poetry for dependency management. The main dependencies are:
+- Python >= 3.10
+- PyTorch 2.2+
+- Lightning 2.1+
+- NumPy
+- SciPy
+- Pandas
+- Scikit-learn
+- Librosa (for signal processing)
+- Plotly & Matplotlib (for visualization)
+- Hugging Face Datasets
+
+### Installation
+
+```bash
+# Install Poetry if you haven't already
+curl -sSL https://install.python-poetry.org | python3 -
+
+# Clone the repository
+git clone https://github.com/alidibaj/autoencoder-based-anomaly-detection
+cd autoencoder-based-anomaly-detection
+
+# Install dependencies using Poetry
+poetry install
+
+# Activate the virtual environment
+poetry env activate
+''' 
+
+## License 
+[License type to be added]
+
+## Contact
+[contact information]
