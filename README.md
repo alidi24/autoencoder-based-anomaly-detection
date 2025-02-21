@@ -90,7 +90,7 @@ config["loss_domain"] = "frequency"  # Options: time, frequency
 
 ## Project Structure
 
-- `models/` - Neural network model definitions
+- `models/` - Autoencoder model definitions
 - `src/` - Core functionality including data processing and training
 - `train.py` - Main training script
 - `analyze_anomalies.py` - Script for analyzing model predictions
