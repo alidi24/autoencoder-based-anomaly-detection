@@ -93,7 +93,6 @@ config["loss_domain"] = "frequency"  # Options: time, frequency
 - `models/` - Autoencoder model definitions
 - `src/` - Core functionality including data processing and training
 - `train.py` - Main training script
-- `analyze_anomalies.py` - Script for analyzing model predictions
 - `config.py` - Configuration parameters
 
 ## License 

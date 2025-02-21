@@ -57,7 +57,8 @@ def plot_anomaly_scores(
     # Add labels and title
     model_name = config.get("which_model", "Model")
     loss_fn = config.get("loss_fn", "Unknown Loss")
-    plt.title(f'Anomaly Scores for {model_name} Model using {loss_fn}')
+    loss_domain = config.get("loss_domain", "Unknown Domain")
+    plt.title(f'Anomaly scores for {model_name} model using {loss_fn} in {loss_domain} domain')
     plt.xlabel('Sample Index')
     plt.ylabel('Anomaly Score')
     plt.legend()
@@ -66,13 +67,13 @@ def plot_anomaly_scores(
         plt.grid(True)
     
     # Save the figure
-    plot_path = os.path.join(output_dir, f"{filename_prefix}_anomaly_scores.png")
+    plot_path = os.path.join(output_dir, f"{filename_prefix}_{loss_fn}_{loss_domain}_anomaly_scores.png")
     plt.savefig(plot_path, dpi=dpi, bbox_inches='tight')
     plt.close()
     print(f"Anomaly score plot saved to {plot_path}")
     
     # Save the raw scores as numpy array for future analysis
-    data_path = os.path.join(output_dir, f"{filename_prefix}_anomaly_scores.npy")
+    data_path = os.path.join(output_dir, f"{filename_prefix}_{loss_fn}_{loss_domain}_anomaly_scores.npy")
     np.save(data_path, np.array(scores))
     print(f"Anomaly scores saved to {data_path}")
     

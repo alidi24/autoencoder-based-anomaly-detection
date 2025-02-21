@@ -84,7 +84,7 @@ def main() -> None:
     trainer = Trainer(
         max_epochs=config["max_epoch"],
         callbacks=callbacks,
-        accelerator="cpu",  # "cpu" or "gpu"
+        accelerator="cuda",  # "cpu" or "cuda"
         default_root_dir=output_dir,
     )
 

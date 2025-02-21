@@ -119,59 +119,6 @@ def kl_divergence(p: torch.Tensor, q: torch.Tensor) -> torch.Tensor:
 
 
 
-def shape_factor(x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
-    """
-    Calculate shape factor loss (ratio of RMS to mean absolute value).
-    Good for detecting general pattern changes.
-    
-    Args:
-        x: First signal
-        y: Second signal
-        
-    Returns:
-        Shape factor loss
-    """
-    def get_shape_factor(signal):
-        rms = torch.sqrt(torch.mean(signal**2, dim=-1))
-        mean_abs = torch.mean(torch.abs(signal), dim=-1)
-        return rms / (mean_abs + 1e-8)
-        
-    return torch.abs(get_shape_factor(x) - get_shape_factor(y)).mean()
-
-
-def combined_loss(x: torch.Tensor, y: torch.Tensor, weights: Optional[Dict[str, float]] = None) -> torch.Tensor:
-    """
-    Combine multiple loss functions with configurable weights.
-    
-    Args:
-        x: Original signal
-        y: Reconstructed signal
-        weights: Dictionary of loss weights. Default weights if None provided.
-        
-    Returns:
-        Weighted combination of multiple losses
-    """
-    if weights is None:
-        weights = {
-            "mse": 1.0,
-            "kl_div": 0.5,
-            "shape": 0.2
-        }
-    
-    # Calculate individual losses
-    mse_loss = F.mse_loss(x, y)
-    kl_loss = kl_divergence(x, y)
-    shape_loss = shape_factor(x, y)
-    
-    # Combine losses with weights
-    total_loss = (
-        weights.get("mse", 1.0) * mse_loss +
-        weights.get("kl_div", 0.5) * kl_loss +
-        weights.get("shape", 0.2) * shape_loss
-    )
-    
-    return total_loss
-
 
 def get_loss_function(loss_name: str, domain: str = "TIME", config: Optional[Dict] = None) -> Callable:
     """
@@ -196,10 +143,8 @@ def get_loss_function(loss_name: str, domain: str = "TIME", config: Optional[Dic
         "MSE": nn.MSELoss(),
         "MAE": nn.L1Loss(),
         "HUBER": nn.HuberLoss(),
-        "COSINE": lambda x, y: 1 - nn.CosineSimilarity(dim=1)(x, y).mean(),
+        "COSINE_SIMILARITY": lambda x, y: 1 - nn.CosineSimilarity(dim=1)(x, y).mean(),
         "KL_DIVERGENCE": kl_divergence,
-        "COMBINED": lambda x, y: combined_loss(x, y, config.get("loss_weights")),
-        "SHAPE_FACTOR": shape_factor,
     }
     
     if loss_name not in loss_fns:
@@ -207,6 +152,10 @@ def get_loss_function(loss_name: str, domain: str = "TIME", config: Optional[Dic
     
     if domain not in ["TIME", "FREQUENCY", "BOTH"]:
         raise ValueError(f"Domain '{domain}' not recognized. Use 'TIME', 'FREQUENCY', or 'BOTH'")
+    
+    # Check for incompatible loss and domain combinations
+    if domain == "TIME" and loss_name == "KL_DIVERGENCE":
+        raise ValueError("KL Divergence cannot be used in time domain in the current implementation. Please use a different loss function or domain.")
     
     # Get the base loss function
     base_loss_fn = loss_fns[loss_name]

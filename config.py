@@ -64,9 +64,9 @@ config = {
     #######################
     "optimizer_name": "adam",
     "scheduler_name": "plateau",
-    "loss_fn": "kl_divergence",
-    "loss_domain": "frequency",
-    "max_epoch": 5,
+    "loss_fn": "mse",
+    "loss_domain": "time",
+    "max_epoch": 100,
     "lr": 0.00001,
     "weight_decay": 0.01,
     "early_stop_monitor": "val_loss",

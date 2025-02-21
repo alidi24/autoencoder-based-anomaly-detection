@@ -173,7 +173,8 @@ cython_debug/
 # temp files
 temp/
 
-outputs/
+lightning_logs/
+model_checkpoints/
 
 *.ckpt
 *.txt
