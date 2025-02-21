@@ -47,7 +47,7 @@ The framework supports multiple loss functions that can be applied in both time 
 
 ## Anomaly Detection Results
 
-Below are the anomaly detection results for the three implemented models when using time-domain MSE as the loss function. Each plot shows the reconstruction error (anomaly score), with normal data (samples 0-1600) and faulty data (samples 1600-5200) from the CWRU bearing dataset.
+Below are the anomaly detection results for the three implemented models when using time-domain MSE as the loss function. Each plot shows the reconstruction error (anomaly score), with normal data (samples 0-1600) and faulty data (samples 1600-5200) from the CWRU bearing dataset - both drive-end and fan-end measurements and different load conditions.
 
 <p align="center">
   <img src="outputs/anomaly_plots/CAE_mse_time_anomaly_scores.png" alt="CAE Anomaly Scores" width="80%">
