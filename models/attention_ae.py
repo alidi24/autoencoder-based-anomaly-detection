@@ -1,3 +1,15 @@
+"""
+Attention Autoencoder for Time Series Data
+
+
+- Self-attention modules that process relationships between different time points
+- Residual attention blocks that combine convolution with self-attention mechanisms
+- Multi-head attention that processes the signal through parallel attention pathways
+- Encoder-decoder structure with progressive downsampling and upsampling
+- Skip connections that link encoder layers to corresponding decoder layers
+
+"""
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

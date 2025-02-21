@@ -1,3 +1,16 @@
+"""
+Convolutional Autoencoder for Time Series Data
+
+
+- 1D convolutional layers for feature extraction in the encoder
+- 1D transposed convolutional layers for signal reconstruction in the decoder
+- Batch normalization for training stability
+- Configurable activation functions
+- Dropout layers for regularization
+- Symmetric structure with matching encoder and decoder layers
+
+"""
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

@@ -1,3 +1,15 @@
+"""
+WaveNet Autoencoder for Time Series Data
+
+
+- WaveNet blocks with dilated convolutions for capturing multi-scale temporal patterns
+- Gated activation functions combining tanh and sigmoid activations
+- Residual connections within each WaveNet block for gradient flow
+- Two-stage downsampling/upsampling for efficient information compression
+- Balanced encoder/decoder structure with mirrored dilation patterns
+
+"""
+
 import torch
 import torch.nn as nn
 from typing import Any, Dict
@@ -25,51 +37,58 @@ class WaveNetAEModel(nn.Module):
         # Get parameters from config
         input_channels = config.get("wavenet_input_channels", 1)
         hidden_channels = config.get("wavenet_hidden_channels", 32)
-        bottleneck_channels = config.get("wavenet_bottleneck_channels", 16)
-        encoder_blocks = config.get("wavenet_encoder_blocks", 8)
-        decoder_blocks = config.get("wavenet_decoder_blocks", 8)
+        bottleneck_channels = config.get("wavenet_bottleneck_channels", 8)
+        num_blocks = config.get("wavenet_blocks", 4)
         dilation_base = config.get("wavenet_dilation_base", 2)
         dropout = config.get("wavenet_dropout", 0.2)
         
+        # Initialize dilations
+        dilations = [dilation_base ** i for i in range(num_blocks)]
+        
         # Build encoder
-        encoder_layers = [
-            nn.Conv1d(input_channels, hidden_channels, kernel_size=7, padding=3),
-            nn.BatchNorm1d(hidden_channels)
-        ]
+        encoder_layers = []
         
         # Add encoder blocks with increasing dilation
-        for i in range(encoder_blocks):
-            dilation = dilation_base ** i
-            encoder_layers.append(WaveNetBlock(hidden_channels, dilation, dropout))
+        for i, dilation in enumerate(dilations):
+            
+            if i == 0:
+                # Create a special first block that can handle input channels
+                first_block = nn.Sequential(
+                    nn.Conv1d(input_channels, hidden_channels, kernel_size=1),
+                    WaveNetBlock(hidden_channels, dilation, dropout)
+                )
+                encoder_layers.append(first_block)
+            else:
+                encoder_layers.append(WaveNetBlock(hidden_channels, dilation, dropout))
         
-        # Add downsampling
-        encoder_layers.append(nn.Conv1d(hidden_channels, bottleneck_channels, kernel_size=4, stride=4))
+        # Add downsampling to bottleneck
+        encoder_layers.extend([
+            nn.Conv1d(hidden_channels, hidden_channels, kernel_size=4, stride=4),
+            nn.Conv1d(hidden_channels, bottleneck_channels, kernel_size=4, stride=4)
+        ])
             
         # Create encoder
         self.encoder = nn.Sequential(*encoder_layers)
         
         # Build decoder
         decoder_layers = [
-            # Upsample
-            nn.ConvTranspose1d(bottleneck_channels, bottleneck_channels, kernel_size=4, stride=4)
+            # Upsample from bottleneck - two stages to expand from 256 to 4096
+            nn.ConvTranspose1d(bottleneck_channels, hidden_channels, kernel_size=4, stride=4),
+            nn.ConvTranspose1d(hidden_channels, hidden_channels, kernel_size=4, stride=4)
         ]
         
-        # Add decoder blocks
-        for i in range(decoder_blocks):
-            dilation = dilation_base ** (i % 4)
-            decoder_layers.append(WaveNetBlock(bottleneck_channels, dilation, dropout))
+        # Add decoder blocks with reversed dilation pattern
+        for i, dilation in enumerate(reversed(dilations)):
             
-        # Add final layers
-        decoder_layers.extend([
-            nn.ConvTranspose1d(bottleneck_channels, hidden_channels, kernel_size=4, stride=4),
-            nn.BatchNorm1d(hidden_channels)
-        ])
-        
-        for i in range(decoder_blocks):
-            dilation = dilation_base ** i
-            decoder_layers.append(WaveNetBlock(hidden_channels, dilation, dropout))
-            
-        decoder_layers.append(nn.Conv1d(hidden_channels, input_channels, kernel_size=7, padding=3))
+            if i == num_blocks - 1:
+                # Create a special last block that can output the right channels
+                last_block = nn.Sequential(
+                    WaveNetBlock(hidden_channels, dilation, dropout),
+                    nn.Conv1d(hidden_channels, input_channels, kernel_size=1)
+                )
+                decoder_layers.append(last_block)
+            else:
+                decoder_layers.append(WaveNetBlock(hidden_channels, dilation, dropout))
         
         # Create decoder
         self.decoder = nn.Sequential(*decoder_layers)
