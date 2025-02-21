@@ -7,9 +7,9 @@ import torch
 import torch.nn as nn
 from torch.optim import Adam, SGD, AdamW, lr_scheduler
 
-from modules.loss_functions import get_loss_function
-from modules.optimizers import get_optimizer, get_lr_scheduler
-from modules.anomaly_visualization import plot_anomaly_scores
+from src.loss_functions import get_loss_function
+from src.optimizers import get_optimizer, get_lr_scheduler
+from src.anomaly_visualization import plot_anomaly_scores
 
 
 class LightningModel(pl.LightningModule):

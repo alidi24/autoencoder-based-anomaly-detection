@@ -12,7 +12,7 @@ import torch
 from datasets import Dataset, concatenate_datasets, load_dataset
 from pytorch_lightning import LightningDataModule, seed_everything
 from torch.utils.data import DataLoader
-from modules.hf_transforms import SplitToFrame, NormalizeSample
+from src.transforms import SplitToFrame, NormalizeSample
 
 
 class DataModule(LightningDataModule):
