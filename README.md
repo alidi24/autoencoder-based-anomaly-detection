@@ -83,8 +83,9 @@ python train.py
 You can customize the model architecture, loss function, training parameters, and more by modifying the configuration file [config.py](config.py)
 
 ```bash
-config["loss_fn"] = "mse"  # Options: mse, mae, huber, cosine, kl_divergence
-config["loss_domain"] = "time"  # Options: time, freq
+config["which_model"] = "CAE"  # Options: CAE, WavenetAE, AttentionAE
+config["loss_fn"] = "mse"  # Options: mse, mae, huber, cosine, kl_divergence, shape_factor, combined
+config["loss_domain"] = "frequency"  # Options: time, frequency
 ```
 
 ## Project Structure
