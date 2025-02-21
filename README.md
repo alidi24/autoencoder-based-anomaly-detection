@@ -82,6 +82,19 @@ python train.py
 ### Model Configuration
 You can customize the model architecture, loss function, training parameters, and more by modifying the configuration file [config.py](config.py)
 
+```bash
+config["loss_fn"] = "mse"  # Options: mse, mae, huber, cosine, kl_divergence
+config["loss_domain"] = "time"  # Options: time, freq
+```
+
+## Project Structure
+
+- `models/` - Neural network model definitions
+- `src/` - Core functionality including data processing and training
+- `train.py` - Main training script
+- `analyze_anomalies.py` - Script for analyzing model predictions
+- `config.py` - Configuration parameters
+
 ## License 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
