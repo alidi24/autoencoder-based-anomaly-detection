@@ -80,7 +80,7 @@ python train.py
 ```
 
 ### Model Configuration
-You can customize the model architecture, loss function, training parameters, and more by modifying the configuration file (config.py)
+You can customize the model architecture, loss function, training parameters, and more by modifying the configuration file [config.py](config.py)
 
 ## License 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
