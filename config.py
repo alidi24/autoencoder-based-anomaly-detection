@@ -3,7 +3,7 @@ config = {
     #######################
     # General Parameters  #
     #######################
-    "which_model": "CAE",  # available options: CAE, WavenetAE, AttentionAE
+    "which_model": "WavenetAE",  # available options: CAE, WavenetAE, AttentionAE
     "frame_length": 4096,
     "hop_length": 2048,
     "batch_size": 32,
@@ -39,10 +39,10 @@ config = {
     #######################
     "wavenet_input_channels": 1,
     "wavenet_hidden_channels": 32,
-    "wavenet_bottleneck_channels": 16,
+    "wavenet_bottleneck_channels": 8,
     "wavenet_encoder_blocks": 4,
     "wavenet_decoder_blocks": 4,
-    "wavenet_kernel_size": 5,
+    "wavenet_kernel_size": 11,
     "wavenet_dilation_base": 2,
     "wavenet_dropout": 0.2,
 
@@ -64,7 +64,7 @@ config = {
     #######################
     "optimizer_name": "adam",
     "scheduler_name": "plateau",
-    "loss_fn": "mse",
+    "loss_fn": "mse",   # available options: mse, mae, huber, kl_divergence, cosine_similarity
     "loss_domain": "time",
     "max_epoch": 100,
     "lr": 0.00001,
