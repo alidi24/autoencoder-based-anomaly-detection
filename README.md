@@ -26,8 +26,8 @@ The dataset used in the original paper was generated using proprietary simulatio
 ### Repository Implementation 
 For demonstration and validation purposes, this repository uses the Case Western Reserve University (CWRU) Bearing Vibration Dataset, which is publicly available. The CWRU dataset contains vibration measurements from normal and faulty bearings with different fault types and severities.
 
-Dataset Source: [https://engineering.case.edu/bearingdatacenter](CWRU Bearing Data Center)
-Hugging Face Version: A processed version is available via Hugging Face Datasets as "alidi/cwru-dataset"
+Dataset Source: [CWRU Bearing Data Center](https://engineering.case.edu/bearingdatacenter)
+Hugging Face Version: A processed version is available via Hugging Face Datasets as [alidi/cwru-dataset](https://huggingface.co/datasets/alidi/cwru-dataset)
 
 The data pipeline is designed to be modular, allowing users to easily adapt the framework to work with their own time series datasets.
 
