@@ -173,6 +173,7 @@ cython_debug/
 # temp files
 temp/
 
-lightning_logs/
+outputs/
 
 *.ckpt
+*.txt
