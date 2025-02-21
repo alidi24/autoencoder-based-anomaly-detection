@@ -64,10 +64,8 @@ Below are the anomaly detection results for the three implemented models when us
   <br>
   <em>Fig. 4: Attention Autoencoder anomaly scores with time-domain MSE loss</em>
 </p>
-The plots show how effectively each model distinguishes between normal and faulty bearing conditions:
 
-
-This clear separation demonstrates the effectiveness of the autoencoder-based approach for unsupervised anomaly detection in vibration data. The Attention Autoencoder appears to be the most sensitive to anomalies, likely due to its ability to capture long-range dependencies in the signal.
+The plots show how effectively each model distinguishes between normal and faulty bearing conditions.The Attention Autoencoder appears to be the most sensitive to anomalies, likely due to its ability to capture long-range dependencies in the signal.
 
 ## Requirements & Installation
 This project uses Poetry for dependency management. The main dependencies are:
