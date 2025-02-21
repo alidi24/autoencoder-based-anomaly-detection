@@ -19,7 +19,18 @@ The initial implementation uses a convolutional autoencoder (CAE) model, as show
   <em>Fig. 1: Overview of data processing and CAE model architecture implemented in the paper</em>
 </p>
 
-**Note**: The dataset used in this study was simulated using proprietary software and can be made available upon request.
+## Dataset
+### Original Dataset
+The dataset used in the original paper was generated using proprietary simulation software for wind turbine permanent-magnet generators and is confidential. It contains electrical and electromagnetic signals under both normal and various fault conditions.
+
+### Repository Implementation 
+For demonstration and validation purposes, this repository uses the Case Western Reserve University (CWRU) Bearing Vibration Dataset, which is publicly available. The CWRU dataset contains vibration measurements from normal and faulty bearings with different fault types and severities.
+
+Dataset Source: [https://engineering.case.edu/bearingdatacenter](CWRU Bearing Data Center)
+Hugging Face Version: A processed version is available via Hugging Face Datasets as "alidi/cwru-dataset"
+
+The data pipeline is designed to be modular, allowing users to easily adapt the framework to work with their own time series datasets.
+
 
 ## Extended Framework
 This repository extends the original work by implementing and evaluating additional autoencoder architectures and loss functions for time series anomaly detection.
@@ -30,7 +41,10 @@ This repository extends the original work by implementing and evaluating additio
 - Attention-based Autoencoder
 
 ### Loss Functions
-[To be added]
+The framework supports multiple loss functions that can be applied in both time and frequency domains:
+
+- Standard Losses: MSE, MAE, Huber, Cosine Similarity, KL Divergence
+- Combined Loss: Weighted combination of multiple losses
 
 
 ## Requirements & Installation
@@ -39,11 +53,8 @@ This project uses Poetry for dependency management. The main dependencies are:
 - PyTorch 2.2+
 - Lightning 2.1+
 - NumPy
-- SciPy
-- Pandas
-- Scikit-learn
 - Librosa (for signal processing)
-- Plotly & Matplotlib (for visualization)
+- Matplotlib (for visualization)
 - Hugging Face Datasets
 
 ### Installation
@@ -63,8 +74,14 @@ poetry install
 poetry env activate
 ```
 
-## License 
-[License type to be added]
+### Training a Model
+```bash
+python train.py
+```
 
-## Contact
-[contact information]
+### Model Configuration
+You can customize the model architecture, loss function, training parameters, and more by modifying the configuration file (config.py)
+
+## License 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
