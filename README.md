@@ -43,9 +43,31 @@ This repository extends the original work by implementing and evaluating additio
 ### Loss Functions
 The framework supports multiple loss functions that can be applied in both time and frequency domains:
 
-- Standard Losses: MSE, MAE, Huber, Cosine Similarity, KL Divergence
-- Combined Loss: Weighted combination of multiple losses
+- MSE, MAE, Huber, Cosine Similarity, KL Divergence
 
+## Anomaly Detection Results
+
+Below are the anomaly detection results for the three implemented models when using time-domain MSE as the loss function. Each plot shows the reconstruction error (anomaly score), with normal data (samples 0-1600) and faulty data (samples 1600-5200) from the CWRU bearing dataset.
+
+<p align="center">
+  <img src="outputs/anomaly_plots/CAE_mse_time_anomaly_scores.png" alt="CAE Anomaly Scores" width="80%">
+  <br>
+  <em>Fig. 2: Convolutional Autoencoder (CAE) anomaly scores with time-domain MSE loss</em>
+</p>
+<p align="center">
+  <img src="outputs/anomaly_plots/WavenetAE_mse_time_anomaly_scores.png" alt="WaveNet Autoencoder Anomaly Scores" width="80%">
+  <br>
+  <em>Fig. 3: WaveNet Autoencoder anomaly scores with time-domain MSE loss</em>
+</p>
+<p align="center">
+  <img src="outputs/anomaly_plots/AttentionAE_mse_time_anomaly_scores.png" alt="Attention Autoencoder Anomaly Scores" width="80%">
+  <br>
+  <em>Fig. 4: Attention Autoencoder anomaly scores with time-domain MSE loss</em>
+</p>
+The plots show how effectively each model distinguishes between normal and faulty bearing conditions:
+
+
+This clear separation demonstrates the effectiveness of the autoencoder-based approach for unsupervised anomaly detection in vibration data. The Attention Autoencoder appears to be the most sensitive to anomalies, likely due to its ability to capture long-range dependencies in the signal.
 
 ## Requirements & Installation
 This project uses Poetry for dependency management. The main dependencies are:
