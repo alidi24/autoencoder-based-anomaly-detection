@@ -4,7 +4,6 @@ Data module for time series anomaly detection using autoencoder architectures.
 Handles loading, preprocessing, and data splitting for normal and faulty data.
 """
 
-import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
