@@ -29,6 +29,13 @@ For demonstration and validation purposes, this repository uses the Case Western
 Dataset Source: [CWRU Bearing Data Center](https://engineering.case.edu/bearingdatacenter)  
 Hugging Face Version: A processed version is available via Hugging Face Datasets as [alidi/cwru-dataset](https://huggingface.co/datasets/alidi/cwru-dataset)
 
+> **Note:** To access the dataset, you'll need a Hugging Face account and access token:
+> ```python
+> from huggingface_hub import login
+> login(token="your_huggingface_token")
+> ```
+> To get your token: Sign up at huggingface.co → Settings → Access Tokens → Create new token
+
 The data pipeline is designed to be modular, allowing users to easily adapt the framework to work with their own time series datasets.
 
 
