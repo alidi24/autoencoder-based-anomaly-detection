@@ -17,7 +17,7 @@ from typing import Any, Dict, List
 
 
 class SelfAttention(nn.Module):
-    """Simple self-attention module for 1D signals."""
+    """Self-attention module for 1D signals."""
     def __init__(self, channels: int, head_dim: int, num_heads: int):
         super(SelfAttention, self).__init__()
         self.scale = head_dim ** -0.5
